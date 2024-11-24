@@ -1,21 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: var(--tea-green);
+  --background: var(--rich-black);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --rich-black: #001412ff;
+    --dark-cyan: #008f88ff;
+    --tea-green: #c0dfa1ff;
+    --hunter-green: #3f6634ff;
+    --pakistan-green: #0a330fff;
   }
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Host Grotesk", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
