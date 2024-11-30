@@ -10,8 +10,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --rich-black: #001412ff;
-    --dark-cyan: #008f88ff;
+    --rich-black: #000000;
+    --dark-cyan: #00CCC2;
     --tea-green: #c0dfa1ff;
     --hunter-green: #3f6634ff;
     --pakistan-green: #0a330fff;
@@ -19,10 +19,41 @@
 }
 
 body {
-  color: var(--foreground);
+  color: var(--rich-black);
   background: var(--background);
   font-family: "Host Grotesk", serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+.about, footer{
+  color: var(--dark-cyan);
+  background-color: var(--pakistan-green);
+}
+
+.about a{
+  color: var(--dark-cyan)
+}
+
+.about a:hover{
+  background-color: var(--pakistan-green);
+}
+
+.nav{
+  color: var(--dark-cyan);
+  background-color: var(--pakistan-green);
+}
+
+.nav a{
+  color: #00F5E9;
+  text-decoration: none;
+}
+
+footer{
+  color: #00F5E9;
+}
+
+.logo-box{
+  background-color: var(--pakistan-green);
 }
