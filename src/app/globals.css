@@ -1,21 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  /* --background: #ffffff;
-  --foreground: #171717; */
+  --foreground: var(--tea-green);
+  --background: var(--rich-black);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* --background: #0a0a0a;
-    --foreground: #ededed; */
+    --rich-black: #000000;
+    --dark-cyan: #00CCC2;
+    --tea-green: #c0dfa1ff;
+    --hunter-green: #3f6634ff;
+    --pakistan-green: #0a330fff;
   }
 }
 
 body {
-  /* color: var(--foreground);
+  color: var(--rich-black);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif; */
+  font-family: "Host Grotesk", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.about, footer{
+  color: var(--dark-cyan);
+  background-color: var(--pakistan-green);
+}
+
+.about a{
+  color: var(--dark-cyan)
+}
+
+.about a:hover{
+  background-color: var(--pakistan-green);
+}
+
+.nav{
+  color: var(--dark-cyan);
+  background-color: var(--pakistan-green);
+}
+
+.nav a{
+  color: #00F5E9;
+  text-decoration: none;
+}
+
+footer{
+  color: #00F5E9;
+}
+
+.logo-box{
+  background-color: var(--pakistan-green);
 }
