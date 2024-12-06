@@ -13,19 +13,19 @@ export default function Home() {
         <div className="flex gap-6">
           <Link
             href="/login"
-            className="text-sm font-medium hover:text-blue-500 transition-colors"
+            className="text-sm font-medium hover:text-[#F5A00E] transition-colors"
           >
             Login
           </Link>
           <Link
             href="/create-account"
-            className="text-sm font-medium hover:text-blue-500 transition-colors"
+            className="text-sm font-medium hover:text-[#F5A00E] transition-colors"
           >
             Create Account
           </Link>
           <Link
             href="/about"
-            className="text-sm font-medium hover:text-blue-500 transition-colors"
+            className="text-sm font-medium hover:text-[#F5A00E] transition-colors"
           >
             About
           </Link>

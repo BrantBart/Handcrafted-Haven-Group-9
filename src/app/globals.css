@@ -28,12 +28,12 @@ body {
 }
 
 .about, footer{
-  color: var(--dark-cyan);
+  color: white;
   background-color: var(--pakistan-green);
 }
 
 .about a{
-  color: var(--dark-cyan)
+  color: white
 }
 
 .about a:hover{
@@ -41,19 +41,19 @@ body {
 }
 
 .nav{
-  color: var(--dark-cyan);
+  color: white;
   background-color: var(--pakistan-green);
 }
 
 .nav a{
-  color: #00F5E9;
+  color: white;
   text-decoration: none;
 }
 
 footer{
-  color: #00F5E9;
+  color: white;
 }
 
-.logo-box{
+.logo-box, .login-form{
   background-color: var(--pakistan-green);
 }
