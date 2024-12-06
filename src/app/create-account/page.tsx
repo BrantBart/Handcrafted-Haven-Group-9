@@ -1,7 +1,7 @@
-import LoginForm from "@/app/ui/login-form";
+import CreateForm from "@/app/ui/create-form";
 import Image from "next/image";
 
-export default function LoginPage() {
+export default function CreatePage() {
   return (
     <main className="flex-grow flex flex-col items-center justify-center text-center">
       <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
@@ -16,7 +16,7 @@ export default function LoginPage() {
             <span className="text-xl font-semibold">Handcrafted Haven</span>
           </div>
         </div>
-        <LoginForm />
+        <CreateForm />
       </div>
     </main>
   );
