@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Header from "@/app/components/header-nav"
 
 export default function Home() {
   return (
