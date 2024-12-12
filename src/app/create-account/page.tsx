@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function CreatePage() {
   return (
-    <main className="flex-grow flex flex-col items-center justify-center text-center">
-      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4">
+    <main className="flex-grow flex flex-col items-center justify-center text-center pt-20">
+      <div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
         <div className="flex h-20 w-full items-center rounded-lg p-3 md:h-36 logo-box">
           <div className="w-32 md:w-36 text-white flex flex-col flex-auto items-center text-center">
             <Image
