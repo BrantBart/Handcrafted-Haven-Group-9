@@ -42,38 +42,38 @@ export default async function AboutPage() {
   return (
     <main className="flex-grow flex flex-col justify-center text-center">
       {/* Users Table */}
-      <h2 className="text-white mb-4">Users</h2>
+      <h2 className="text-black mb-4">Users</h2>
       {users.length > 0 ? (
-        <table className="table-auto border-collapse border border-gray-200 text-white mb-8">
+        <table className="table-auto border-collapse border border-black text-black mb-8">
           <thead>
             <tr>
-              <th className="border border-gray-200 px-4 py-2">User ID</th>
-              <th className="border border-gray-200 px-4 py-2">Username</th>
-              <th className="border border-gray-200 px-4 py-2">Email</th>
-              <th className="border border-gray-200 px-4 py-2">Password</th>
-              <th className="border border-gray-200 px-4 py-2">Seller</th>
-              <th className="border border-gray-200 px-4 py-2">Created On</th>
+              <th className="border border-black px-4 py-2">User ID</th>
+              <th className="border border-black px-4 py-2">Username</th>
+              <th className="border border-black px-4 py-2">Email</th>
+              <th className="border border-black px-4 py-2">Password</th>
+              <th className="border border-black px-4 py-2">Seller</th>
+              <th className="border border-black px-4 py-2">Created On</th>
             </tr>
           </thead>
           <tbody>
             {users.map((user) => (
               <tr key={user.user_id}>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {user.user_id}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {user.username}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {user.email}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {user.password}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {user.seller ? "Yes" : "No"}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {new Date(user.created_on).toLocaleDateString()}
                 </td>
               </tr>
@@ -81,36 +81,36 @@ export default async function AboutPage() {
           </tbody>
         </table>
       ) : (
-        <p className="text-white">No users found.</p>
+        <p className="text-black">No users found.</p>
       )}
 
       {/* Goods Table */}
-      <h2 className="text-white mb-4">Goods</h2>
+      <h2 className="text-black mb-4">Goods</h2>
       {goods.length > 0 ? (
-        <table className="table-auto border-collapse border border-gray-200 text-white">
+        <table className="table-auto border-collapse border border-black text-black">
           <thead>
             <tr>
-              <th className="border border-gray-200 px-4 py-2">Goods ID</th>
-              <th className="border border-gray-200 px-4 py-2">Name</th>
-              <th className="border border-gray-200 px-4 py-2">Username</th>
-              <th className="border border-gray-200 px-4 py-2">Image Link</th>
-              <th className="border border-gray-200 px-4 py-2">Types</th>
-              <th className="border border-gray-200 px-4 py-2">Created On</th>
+              <th className="border border-black px-4 py-2">Goods ID</th>
+              <th className="border border-black px-4 py-2">Name</th>
+              <th className="border border-black px-4 py-2">Username</th>
+              <th className="border border-black px-4 py-2">Image Link</th>
+              <th className="border border-black px-4 py-2">Types</th>
+              <th className="border border-black px-4 py-2">Created On</th>
             </tr>
           </thead>
           <tbody>
             {goods.map((good) => (
               <tr key={good.goods_id}>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {good.goods_id}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {good.name}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {good.username}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {good.image_link ? (
                     <a
                       href={good.image_link}
@@ -123,10 +123,10 @@ export default async function AboutPage() {
                     "No image available"
                   )}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {good.type_names ? good.type_names : "No types"}
                 </td>
-                <td className="border border-gray-200 px-4 py-2">
+                <td className="border border-black px-4 py-2">
                   {new Date(good.created_on).toLocaleDateString()}
                 </td>
               </tr>
@@ -134,7 +134,7 @@ export default async function AboutPage() {
           </tbody>
         </table>
       ) : (
-        <p className="text-white">No goods found.</p>
+        <p className="text-black">No goods found.</p>
       )}
     </main>
   );
