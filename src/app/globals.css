@@ -4,18 +4,10 @@
 @tailwind utilities;
 
 :root {
-  /* --foreground: var(--tea-green); */
   --background: var(--fern-green);
 }
 
 @media (prefers-color-scheme: dark) {
-  /* :root {
-    --rich-black: #000000;
-    --dark-cyan: #00ccc2;
-    --tea-green: #c0dfa1ff;
-    --hunter-green: #3f6634ff;
-    --pakistan-green: #0a330fff;
-  } */
   :root {
     --timberwolf: #dad7cdff;
     --sage: #a3b18aff;
@@ -26,7 +18,6 @@
 }
 
 body {
-  color: var(--rich-black);
   background: var(--background);
   font-family: "Host Grotesk", serif;
   font-optical-sizing: auto;
@@ -40,8 +31,6 @@ footer,
   color: black;
   background-color: var(--sage);
 }
-
-
 
 .about a {
   color: white;
