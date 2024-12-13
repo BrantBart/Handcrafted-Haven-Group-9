@@ -43,9 +43,9 @@ export default function CreateForm() {
       <form 
     //   action={formAction} text-[#00CCC2] bg-[#0a330fff]
       className="space-y-3">
-        <div className="flex-1 rounded-lg bg-gray-50 px-6 pt-6 login-form text-white">
+        <div className="flex-1 rounded-lg bg-gray-50 px-6 pt-6 login-form text-black">
           <h1 className={`mb-3 text-2xl`}>
-            Create an Account with Us
+            Create an Account with Us!
           </h1>
           <div className="w-full">
             <div>
@@ -110,7 +110,7 @@ export default function CreateForm() {
               </div>
             </div>
           </div>
-          <button className="mt-4 w-full hover:bg-[#3f6634ff] p-3" 
+          <button className="mt-4 w-full create-account-button p-3" 
         //   aria-disabled={isPending}
           >
             Create

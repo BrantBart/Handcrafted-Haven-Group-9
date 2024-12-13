@@ -21,7 +21,7 @@ export default function LoginForm() {
       <form 
     //   action={formAction} text-[#00CCC2] bg-[#0a330fff]
       className="space-y-3">
-        <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 login-form text-white">
+        <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 login-form text-black">
           <h1 className={`mb-3 text-2xl`}>
             Please log in to continue.
           </h1>
@@ -66,7 +66,7 @@ export default function LoginForm() {
               </div>
             </div>
           </div>
-          <button className="mt-4 w-full hover:bg-[#3f6634ff] p-3" 
+          <button className="mt-4 w-full p-3 login-button" 
         //   aria-disabled={isPending}
           >
             Log in 

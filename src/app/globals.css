@@ -1,20 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground: var(--tea-green);
-  --background: var(--rich-black);
+  /* --foreground: var(--tea-green); */
+  --background: var(--fern-green);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  /* :root {
     --rich-black: #000000;
-    --dark-cyan: #00CCC2;
+    --dark-cyan: #00ccc2;
     --tea-green: #c0dfa1ff;
     --hunter-green: #3f6634ff;
     --pakistan-green: #0a330fff;
+  } */
+  :root {
+    --timberwolf: #dad7cdff;
+    --sage: #a3b18aff;
+    --fern-green: #588157ff;
+    --hunter-green: #3a5a40ff;
+    --brunswick-green: #344e41ff;
   }
 }
 
@@ -27,33 +34,36 @@ body {
   font-style: normal;
 }
 
-.about, footer{
+.about,
+footer,
+.nav {
+  color: black;
+  background-color: var(--sage);
+}
+
+
+
+.about a {
   color: white;
-  background-color: var(--pakistan-green);
 }
 
-.about a{
-  color: white
+.about a:hover {
+  background-color: var(--sage);
+  color: black;
+  font-weight: light;
 }
 
-.about a:hover{
-  background-color: var(--pakistan-green);
-}
-
-.nav{
-  color: white;
-  background-color: var(--pakistan-green);
-}
-
-.nav a{
-  color: white;
+.nav a {
+  color: black;
   text-decoration: none;
 }
 
-footer{
-  color: white;
+.logo-box,
+.login-form {
+  background-color: var(--sage);
 }
 
-.logo-box, .login-form{
-  background-color: var(--pakistan-green);
+.login-button:hover,
+.create-account-button:hover {  
+  background-color: var(--fern-green);
 }
