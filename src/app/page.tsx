@@ -16,14 +16,23 @@ export default function Home() {
             user-friendly features, secure e-commerce capabilities, and emphasis
             on customization and community engagement, Handcrafted Haven is set
             to become the go-to destination for those seeking unique,
-            handcrafted treasures.{" "}
+            handcrafted treasures.
           </p>
-          <Link
-            href="/login"
-            className="grid self-center gap-2 rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-colors"
-          >
-            Get Started
-          </Link>
+          <div className="flex flex-col gap-4">
+            <Link
+              href="/login"
+              className="grid self-center gap-2 rounded-lg bg-black px-6 py-3 text-sm font-medium text-white transition-colors"
+            >
+              Get Started
+            </Link>
+            {/* New Link to Gallery Page */}
+            <Link
+              href="/gallery"
+              className="grid self-center gap-2 rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-600"
+            >
+              Explore the Gallery
+            </Link>
+          </div>
         </div>
       </main>
   );
