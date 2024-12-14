@@ -101,7 +101,7 @@ export default async function MerchPage({
         <div className="mt-6">
           <h3 className="text-xl font-semibold">Reviews</h3>
           <div>
-            {reviews.map((review: any, index: number) => (
+            {reviews.map((review, index: number) => (
               <div key={index} className="border-b py-2">
                 <p className="font-semibold">{review.username}</p>
                 <p className="text-yellow-500">

@@ -42,7 +42,7 @@ export default async function GalleryMerchPage() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
-      {merch.map((merch: any) => (
+      {merch.map((merch) => (
         <div
           key={merch.merch_id}
           className="border p-4 h-72 rounded-lg shadow-lg transition-shadow hover:shadow-xl bg-white"
