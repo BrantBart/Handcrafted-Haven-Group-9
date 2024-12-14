@@ -7,11 +7,11 @@ const sql = neon(`${process.env.DATABASE_URL}`);
 
 // Typing for the MerchPage component
 interface MerchPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 const MerchPage = async ({ params }: MerchPageProps) => {
-  const { id } = params;
+  const { id } = await params;
 
   // Function to fetch merch and reviews data
   const getMerchData = async (id: string) => {
