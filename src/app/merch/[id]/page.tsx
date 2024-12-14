@@ -5,11 +5,65 @@ import Image from "next/image";
 
 // Define your PageProps type explicitly if not already defined
 type MerchPageProps = {
-  merch: any;
-  reviews: any[];
+  params: { id: string };
 };
 
-const MerchPage: NextPage<MerchPageProps> = ({ merch, reviews }) => {
+const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
+  // Function to fetch merch data for a specific item based on the 'id' in the URL
+  async function getIndividualMerch(id: string) {
+    const sql = neon(`${process.env.DATABASE_URL}`);
+    try {
+      const query = `
+        SELECT 
+          merch.*, 
+          users.username,
+          STRING_AGG(categories.name, ', ') AS Categories
+        FROM merch
+        JOIN users ON merch.user_id = users.user_id
+        LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
+        LEFT JOIN categories ON merch_categories.category_id = categories.category_id
+        WHERE merch.merch_id = $1
+        GROUP BY 
+          merch.merch_id, 
+          users.username,
+          merch.name,
+          merch.created_on,
+          merch.price,
+          merch.description,
+          merch.image_link
+      `;
+      const result = await sql(query, [id]);
+      return result[0] || null;
+    } catch (error) {
+      console.error("Error fetching individual merch:", error);
+      return null;
+    }
+  }
+
+  async function getReviews(id: string) {
+    const sql = neon(`${process.env.DATABASE_URL}`);
+    try {
+      const query = `
+        SELECT 
+          reviews.review_score, 
+          reviews.comment, 
+          reviews.created_on, 
+          users.username
+        FROM reviews
+        JOIN users ON reviews.user_id = users.user_id
+        WHERE reviews.merch_id = $1
+        ORDER BY reviews.created_on DESC
+      `;
+      return await sql(query, [id]);
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      return [];
+    }
+  }
+
+  const merch = await getIndividualMerch(params.id);
+  const reviews = await getReviews(params.id);
+
   if (!merch) {
     return <p className="text-center text-red-500">Merch item not found.</p>;
   }
@@ -72,77 +126,6 @@ const MerchPage: NextPage<MerchPageProps> = ({ merch, reviews }) => {
       </Link>
     </div>
   );
-};
-
-// Fetching data using getServerSideProps (async)
-export const getServerSideProps = async ({
-  params,
-}: {
-  params: { id: string };
-}) => {
-  const sql = neon(`${process.env.DATABASE_URL}`);
-
-  // Fetch individual merch data
-  const getIndividualMerch = async (id: string) => {
-    try {
-      const query = `
-        SELECT 
-          merch.*, 
-          users.username,
-          STRING_AGG(categories.name, ', ') AS Categories
-        FROM merch
-        JOIN users ON merch.user_id = users.user_id
-        LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
-        LEFT JOIN categories ON merch_categories.category_id = categories.category_id
-        WHERE merch.merch_id = $1
-        GROUP BY 
-          merch.merch_id, 
-          users.username,
-          merch.name,
-          merch.created_on,
-          merch.price,
-          merch.description,
-          merch.image_link
-      `;
-      const result = await sql(query, [id]);
-      return result[0] || null;
-    } catch (error) {
-      console.error("Error fetching individual merch:", error);
-      return null;
-    }
-  };
-
-  // Fetch reviews for the merch
-  const getReviews = async (id: string) => {
-    try {
-      const query = `
-        SELECT 
-          reviews.review_score, 
-          reviews.comment, 
-          reviews.created_on, 
-          users.username
-        FROM reviews
-        JOIN users ON reviews.user_id = users.user_id
-        WHERE reviews.merch_id = $1
-        ORDER BY reviews.created_on DESC
-      `;
-      const result = await sql(query, [id]);
-      return result || [];
-    } catch (error) {
-      console.error("Error fetching reviews:", error);
-      return [];
-    }
-  };
-
-  const merch = await getIndividualMerch(params.id);
-  const reviews = await getReviews(params.id);
-
-  return {
-    props: {
-      merch,
-      reviews,
-    },
-  };
 };
 
 export default MerchPage;
