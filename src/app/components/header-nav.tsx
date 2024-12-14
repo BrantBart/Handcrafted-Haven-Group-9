@@ -1,7 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getSession } from "@/actions";
+import LogoutForm from "../ui/logout-form";
 
-export default function Header() {
+const Header = async () => {
+  const session = await getSession();
+  console.log(session);
+
   return (
     <nav className="flex justify-between items-center p-6 px-8 nav mb-4 fixed top-0 left-0 right-0 w-full">
       <Link href="/">
@@ -25,13 +30,34 @@ export default function Header() {
         >
           Create Account
         </Link>
+        {/* {session.isLoggedIn && ( */}
         <Link
-          href="/about"
+          href="/datapage"
           className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
         >
-          About
+          Data
         </Link>
+        {/* )} */}
+        {/* {session.isLoggedIn && ( */}
+        <Link
+          href="/merch"
+          className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
+        >
+          Merchandise
+        </Link>
+        {/* )} */}
+        {/* {session.isLoggedIn && ( */}
+        <Link
+          href="/sellers"
+          className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
+        >
+          Sellers
+        </Link>
+        {/* )} */}
+        {session.isLoggedIn && <LogoutForm />}
       </div>
     </nav>
   );
-}
+};
+
+export default Header;
