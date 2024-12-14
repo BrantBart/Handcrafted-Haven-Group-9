@@ -5,18 +5,19 @@ import Image from "next/image";
 // The sql instance for querying the database
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-// Typing for the MerchPage component
+// Typing for the dynamic route parameters
 interface MerchPageProps {
   params: { id: string };
 }
 
-const MerchPage = async ({ params }: MerchPageProps) => {
+// The MerchPage component
+export default async function MerchPage({ params }: MerchPageProps) {
   const { id } = params;
 
   // Function to fetch merch and reviews data
   const getMerchData = async (id: string) => {
     const merchQuery = `
-      SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
+      SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS categories
       FROM merch
       JOIN users ON merch.user_id = users.user_id
       LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
@@ -39,12 +40,25 @@ const MerchPage = async ({ params }: MerchPageProps) => {
     return { merch: merch[0] || null, reviews };
   };
 
+  // Fetch the merch and reviews data
   const { merch, reviews } = await getMerchData(id);
 
+  // Handle case where the merch item is not found
   if (!merch) {
-    return <p className="text-center text-red-500">Merch item not found.</p>;
+    return (
+      <div className="text-center text-red-500">
+        <p>Merch item not found.</p>
+        <Link
+          href="/merch"
+          className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
+        >
+          Back to Gallery
+        </Link>
+      </div>
+    );
   }
 
+  // Render the merch item details
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -55,7 +69,7 @@ const MerchPage = async ({ params }: MerchPageProps) => {
               alt={merch.description}
               width={500}
               height={500}
-              className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
+              className="rounded-md"
             />
           ) : (
             <p className="text-center text-gray-500">Image not available</p>
@@ -67,7 +81,6 @@ const MerchPage = async ({ params }: MerchPageProps) => {
           <p className="text-lg font-bold">Price: ${merch.price}</p>
           <p className="text-lg">Categories: {merch.categories}</p>
           <p className="text-lg">Seller: {merch.username}</p>
-          <p className="text-lg">Ratings: ★★★★☆</p>
         </div>
       </div>
 
@@ -99,6 +112,4 @@ const MerchPage = async ({ params }: MerchPageProps) => {
       </Link>
     </div>
   );
-};
-
-export default MerchPage;
+}
