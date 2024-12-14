@@ -1,7 +1,9 @@
 import { neon } from "@neondatabase/serverless";
 
+
+
 export default async function AboutPage() {
-  "use server";
+  "use client";
 
   // Function to fetch all users
   async function getUsers() {

@@ -1,7 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-// import { fetchHandcraftImages } from "@/app/lib/app";
-// import { formatPrice } from "@/app/lib/util";
 import { neon } from "@neondatabase/serverless";
 
 async function getMerch() {
@@ -42,7 +40,7 @@ export default async function GalleryMerchPage() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
-      {merch.map((merch) => (
+      {merch.map((merch: any) => (
         <div
           key={merch.merch_id}
           className="border p-4 h-72 rounded-lg shadow-lg transition-shadow hover:shadow-xl bg-white"
@@ -51,11 +49,16 @@ export default async function GalleryMerchPage() {
           <Link href={`/merch/${merch.merch_id}`}>
             <div className="relative group h-full">
               {/* Image */}
-              <Image
-                src={merch.image_link}
-                alt={merch.description}
-                className="w-full h-48 object-cover rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
-              />
+              <div className="relative w-full h-48">
+                <Image
+                  src={merch.image_link}
+                  alt={merch.description}
+                  layout="fill"
+                  objectFit="cover" // Ensures the image fills the container
+                  className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
+                />
+              </div>
+
               {/* Photographer Name */}
               <div className="mt-4 text-center">
                 <h3 className="text-lg font-medium">{merch.name}</h3>
