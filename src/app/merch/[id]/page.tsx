@@ -8,10 +8,11 @@ type MerchPageProps = {
   params: { id: string };
 };
 
+const sql = neon(`${process.env.DATABASE_URL}`);
+
 const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
   // Function to fetch merch data for a specific item based on the 'id' in the URL
   async function getIndividualMerch(id: string) {
-    const sql = neon(`${process.env.DATABASE_URL}`);
     try {
       const query = `
         SELECT 
