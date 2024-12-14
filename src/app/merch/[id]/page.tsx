@@ -101,4 +101,5 @@ const MerchPage = async ({ params }: MerchPageProps) => {
   );
 };
 
+// Ensure this component returns a valid JSX element
 export default MerchPage;
