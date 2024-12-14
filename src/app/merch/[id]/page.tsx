@@ -3,12 +3,12 @@ import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
-type MerchPageProps = { params: { id: number } };
+type MerchPageProps = { params: { id: any } };
 
 const sql = neon(`${process.env.DATABASE_URL}`);
 
 const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
-  const getMerchData = async (id: number) => {
+  const getMerchData = async (id: any) => {
     try {
       const merchQuery = `
         SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
