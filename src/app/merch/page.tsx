@@ -1,9 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { neon } from "@neondatabase/serverless";
+const sql = neon(`${process.env.DATABASE_URL}`);
 
 async function getMerch() {
-  const sql = neon(`${process.env.DATABASE_URL}`);
+"use client";
   try {
     // Query to fetch goods and join with users and categories
     const query = `
