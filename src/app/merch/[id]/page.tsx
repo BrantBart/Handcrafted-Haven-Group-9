@@ -3,12 +3,16 @@ import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
-type MerchPageProps = { params: { id: any } };
+type MerchPageProps = {
+  params: {
+    id: string; // Vercel passes params as strings, so we keep it as a string for safety
+  };
+};
 
 const sql = neon(`${process.env.DATABASE_URL}`);
 
 const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
-  const getMerchData = async (id: any) => {
+  const getMerchData = async (id: string) => {
     try {
       const merchQuery = `
         SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
