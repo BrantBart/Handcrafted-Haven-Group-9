@@ -1,23 +1,18 @@
-"use server";
-
+import type { NextPage } from "next";
 import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
-// type MerchPageProps = {
-//   params: { id: string };
-// };
-
-export default async function MerchPage({
-  params,
-}: {
+// Define your PageProps type explicitly if not already defined
+type MerchPageProps = {
   params: { id: string };
-}) {
+};
+
+const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
   // Function to fetch merch data for a specific item based on the 'id' in the URL
   async function getIndividualMerch(id: string) {
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
-      // Query to fetch merch details, join with user and categories, and fetch reviews as separate entries
       const query = `
         SELECT 
           merch.*, 
@@ -37,17 +32,14 @@ export default async function MerchPage({
           merch.description,
           merch.image_link
       `;
-
-      // Execute the query and fetch the first result
       const result = await sql(query, [id]);
-      return result[0] || null; // Returning the first result or null if not found
+      return result[0] || null;
     } catch (error) {
       console.error("Error fetching individual merch:", error);
-      return null; // Return null if an error occurs
+      return null;
     }
   }
 
-  // Function to fetch reviews based on the merch id
   async function getReviews(id: string) {
     const sql = neon(`${process.env.DATABASE_URL}`);
     try {
@@ -65,11 +57,10 @@ export default async function MerchPage({
       return await sql(query, [id]);
     } catch (error) {
       console.error("Error fetching reviews:", error);
-      return []; // Return empty array if an error occurs
+      return [];
     }
   }
 
-  // Fetch the specific merch data and reviews based on the 'id' from the URL
   const merch = await getIndividualMerch(params.id);
   const reviews = await getReviews(params.id);
 
@@ -79,9 +70,7 @@ export default async function MerchPage({
 
   return (
     <div className="max-w-4xl mx-auto p-4">
-      {/* Main Content Container */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Image Container */}
         <div className="w-full h-full">
           {merch.image_link ? (
             <div className="relative h-48">
@@ -89,7 +78,7 @@ export default async function MerchPage({
                 src={merch.image_link}
                 alt={merch.description}
                 layout="fill"
-                objectFit="cover" // Ensures the image fills the container
+                objectFit="cover"
                 className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
               />
             </div>
@@ -97,25 +86,21 @@ export default async function MerchPage({
             <p className="text-center text-gray-500">Image not available</p>
           )}
         </div>
-
-        {/* Information Container */}
         <div className="flex flex-col justify-between space-y-4">
           <h2 className="text-2xl font-semibold">{merch.name}</h2>
           <p className="text-gray-600">{merch.description}</p>
           <p className="text-lg font-bold">Price: ${merch.price}</p>
           <p className="text-lg">Categories: {merch.categories}</p>
           <p className="text-lg">Seller: {merch.username}</p>
-          <p className="text-lg">Ratings: ★★★★☆ </p>{" "}
-          {/* Placeholder for ratings */}
+          <p className="text-lg">Ratings: ★★★★☆</p>
         </div>
       </div>
 
-      {/* Reviews Section */}
       {reviews.length > 0 ? (
         <div className="mt-6">
           <h3 className="text-xl font-semibold">Reviews</h3>
           <div>
-            {reviews.map((review, index: number) => (
+            {reviews.map((review, index) => (
               <div key={index} className="border-b py-2">
                 <p className="font-semibold">{review.username}</p>
                 <p className="text-yellow-500">
@@ -141,4 +126,6 @@ export default async function MerchPage({
       </Link>
     </div>
   );
-}
+};
+
+export default MerchPage;
