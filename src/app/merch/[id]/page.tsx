@@ -4,12 +4,11 @@ import Image from "next/image";
 
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-// type MerchPageProps = {
-//   merch: any;
-//   reviews: any[];
-// };
+interface MerchPageProps {
+  params: { id: string };
+}
 
-const MerchPage = async ({ params }: { params: { id: string } }) => {
+const MerchPage = async ({ params }: MerchPageProps) => {
   const { id } = params;
 
   const getMerchData = async (id: string) => {
