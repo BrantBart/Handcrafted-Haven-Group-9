@@ -5,12 +5,12 @@ import Image from "next/image";
 // The sql instance for querying the database
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-// Typing for the dynamic route parameters
+// Typing for the MerchPage component, params comes from dynamic route
 interface MerchPageProps {
   params: { id: string };
 }
 
-// The MerchPage component
+// The MerchPage component, using `params` directly
 export default async function MerchPage({ params }: MerchPageProps) {
   const { id } = params;
 
