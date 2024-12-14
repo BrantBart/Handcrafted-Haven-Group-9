@@ -2,8 +2,10 @@ import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
+// The sql instance for querying the database
 const sql = neon(`${process.env.DATABASE_URL}`);
 
+// Typing for the MerchPage component
 interface MerchPageProps {
   params: { id: string };
 }
@@ -11,6 +13,7 @@ interface MerchPageProps {
 const MerchPage = async ({ params }: MerchPageProps) => {
   const { id } = params;
 
+  // Function to fetch merch and reviews data
   const getMerchData = async (id: string) => {
     const merchQuery = `
       SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
@@ -20,6 +23,7 @@ const MerchPage = async ({ params }: MerchPageProps) => {
       LEFT JOIN categories ON merch_categories.category_id = categories.category_id
       WHERE merch.merch_id = $1
       GROUP BY merch.merch_id, users.username, merch.name, merch.created_on, merch.price, merch.description, merch.image_link`;
+
     const reviewsQuery = `
       SELECT reviews.review_score, reviews.comment, reviews.created_on, users.username
       FROM reviews
