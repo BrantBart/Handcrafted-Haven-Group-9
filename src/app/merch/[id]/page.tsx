@@ -1,50 +1,46 @@
-import type { NextPage } from "next";
 import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
-type MerchPageProps = {
-  params: {
-    id: string; // Vercel passes params as strings, so we keep it as a string for safety
-  };
-};
-
 const sql = neon(`${process.env.DATABASE_URL}`);
 
-const MerchPage: NextPage<MerchPageProps> = async ({ params }) => {
+type MerchPageProps = {
+  merch: any;
+  reviews: any[];
+};
+
+const MerchPage = async ({ params }: { params: { id: string } }) => {
+  const { id } = params;
+
   const getMerchData = async (id: string) => {
-    try {
-      const merchQuery = `
-        SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
-        FROM merch
-        JOIN users ON merch.user_id = users.user_id
-        LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
-        LEFT JOIN categories ON merch_categories.category_id = categories.category_id
-        WHERE merch.merch_id = $1
-        GROUP BY merch.merch_id, users.username, merch.name, merch.created_on, merch.price, merch.description, merch.image_link`;
-      const reviewsQuery = `
-        SELECT reviews.review_score, reviews.comment, reviews.created_on, users.username
-        FROM reviews
-        JOIN users ON reviews.user_id = users.user_id
-        WHERE reviews.merch_id = $1
-        ORDER BY reviews.created_on DESC`;
+    const merchQuery = `
+      SELECT merch.*, users.username, STRING_AGG(categories.name, ', ') AS Categories
+      FROM merch
+      JOIN users ON merch.user_id = users.user_id
+      LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
+      LEFT JOIN categories ON merch_categories.category_id = categories.category_id
+      WHERE merch.merch_id = $1
+      GROUP BY merch.merch_id, users.username, merch.name, merch.created_on, merch.price, merch.description, merch.image_link`;
+    const reviewsQuery = `
+      SELECT reviews.review_score, reviews.comment, reviews.created_on, users.username
+      FROM reviews
+      JOIN users ON reviews.user_id = users.user_id
+      WHERE reviews.merch_id = $1
+      ORDER BY reviews.created_on DESC`;
 
-      const [merch, reviews] = await Promise.all([
-        sql(merchQuery, [id]),
-        sql(reviewsQuery, [id]),
-      ]);
+    const [merch, reviews] = await Promise.all([
+      sql(merchQuery, [id]),
+      sql(reviewsQuery, [id]),
+    ]);
 
-      return { merch: merch[0] || null, reviews };
-    } catch (error) {
-      console.error("Error fetching merch data:", error);
-      return { merch: null, reviews: [] };
-    }
+    return { merch: merch[0] || null, reviews };
   };
 
-  const { merch, reviews } = await getMerchData(params.id);
+  const { merch, reviews } = await getMerchData(id);
 
-  if (!merch)
+  if (!merch) {
     return <p className="text-center text-red-500">Merch item not found.</p>;
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-4">
