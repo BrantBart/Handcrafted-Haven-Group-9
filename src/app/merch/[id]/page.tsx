@@ -4,9 +4,9 @@ import { neon } from "@neondatabase/serverless";
 import Link from "next/link";
 import Image from "next/image";
 
-type MerchPageProps = {
-  params: { id: string };
-};
+// type MerchPageProps = {
+//   params: { id: string };
+// };
 
 export default async function MerchPage({
   params,
@@ -84,11 +84,15 @@ export default async function MerchPage({
         {/* Image Container */}
         <div className="w-full h-full">
           {merch.image_link ? (
-            <Image
-              src={merch.image_link}
-              alt={merch.name}
-              className="w-full h-full object-cover rounded-lg"
-            />
+            <div className="relative h-48">
+              <Image
+                src={merch.image_link}
+                alt={merch.description}
+                layout="fill"
+                objectFit="cover" // Ensures the image fills the container
+                className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
+              />
+            </div>
           ) : (
             <p className="text-center text-gray-500">Image not available</p>
           )}

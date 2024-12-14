@@ -40,7 +40,7 @@ export default async function GalleryMerchPage() {
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 bg-gray-100">
-      {merch.map((merch: any) => (
+      {merch.map((merch) => (
         <div
           key={merch.merch_id}
           className="border p-4 h-72 rounded-lg shadow-lg transition-shadow hover:shadow-xl bg-white"
@@ -49,15 +49,19 @@ export default async function GalleryMerchPage() {
           <Link href={`/merch/${merch.merch_id}`}>
             <div className="relative group h-full">
               {/* Image */}
-              <div className="relative w-full h-48">
-                <Image
-                  src={merch.image_link}
-                  alt={merch.description}
-                  layout="fill"
-                  objectFit="cover" // Ensures the image fills the container
-                  className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
-                />
-              </div>
+              {merch.image_link ? (
+                <div className="relative h-48">
+                  <Image
+                    src={merch.image_link}
+                    alt={merch.description}
+                    layout="fill"
+                    objectFit="cover" // Ensures the image fills the container
+                    className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
+                  />
+                </div>
+              ) : (
+                <p className="text-center text-gray-500">Image not available</p>
+              )}
 
               {/* Photographer Name */}
               <div className="mt-4 text-center">
