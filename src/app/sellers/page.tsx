@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { fetchHandcraftImages } from "@/app/lib/app";
 import { formatPrice } from "@/app/lib/util";
+import Image from "next/image";
 
 export default async function GalleryPage() {
   const images = await fetchHandcraftImages("handcraft");
@@ -16,7 +17,7 @@ export default async function GalleryPage() {
           <Link href={`/sellers/${image.id}`}>
             <div className="relative group h-full">
               {/* Image */}
-              <img
+              <Image
                 src={image.src.small}
                 alt={image.alt}
                 className="w-full h-48 object-cover rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"

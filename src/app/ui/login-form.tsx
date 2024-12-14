@@ -20,6 +20,7 @@ const LoginForm = () => {
         // Handle successful login, e.g., redirect or display a success message
       }
     } catch (err) {
+      console.error(err);
       setError("An unexpected error occurred. Please try again.");
     }
   };

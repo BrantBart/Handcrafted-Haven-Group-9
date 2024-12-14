@@ -12,14 +12,14 @@ import { neon } from "@neondatabase/serverless";
 const sql = neon(`${process.env.DATABASE_URL}`);
 
 // Fetch all users
-async function getUsers() {
-  try {
-    return await sql("SELECT * FROM users");
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return [];
-  }
-}
+// async function getUsers() {
+//   try {
+//     return await sql("SELECT * FROM users");
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//     return [];
+//   }
+// }
 
 // Fetch a user by email
 async function getUserByEmail(email: string) {

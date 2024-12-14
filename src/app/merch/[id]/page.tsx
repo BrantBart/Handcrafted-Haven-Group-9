@@ -1,4 +1,6 @@
 import { neon } from "@neondatabase/serverless";
+import Link from "next/link";
+import Image from "next/image";
 
 export default async function MerchPage({
   params,
@@ -75,7 +77,7 @@ export default async function MerchPage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Image Container */}
         <div className="w-full h-full">
-          <img
+          <Image
             src={merch.image_link}
             alt={merch.name}
             className="w-full h-full object-cover rounded-lg"
@@ -117,12 +119,12 @@ export default async function MerchPage({
         <p className="text-center text-gray-600">No reviews yet</p>
       )}
 
-      <a
+      <Link
         href="/merch"
         className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
       >
         Back to Gallery
-      </a>
+      </Link>
     </div>
   );
 }

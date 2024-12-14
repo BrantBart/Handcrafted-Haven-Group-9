@@ -1,5 +1,7 @@
 import { fetchHandcraftImages } from "@/app/lib/app";
 import { formatPrice } from "@/app/lib/util";
+import Image from "next/image";
+import Link from "next/link";
 
 export default async function ImagePage({
   params,
@@ -20,7 +22,7 @@ export default async function ImagePage({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Image Container */}
         <div className="w-full h-full">
-          <img
+          <Image
             src={image.src.large}
             alt={image.alt}
             className="w-full h-full object-cover rounded-lg"
@@ -35,12 +37,12 @@ export default async function ImagePage({
           </p>
           <p className="text-lg font-bold">Price: {formatPrice(20.99)}</p>
           <p className="text-lg">Ratings: ★★★★☆ (4.5)</p>
-          <a
+          <Link
             href="/sellers"
             className="inline-block mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg"
           >
             Back to Gallery
-          </a>
+          </Link>
         </div>
       </div>
     </div>

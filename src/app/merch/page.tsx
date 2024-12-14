@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 // import { fetchHandcraftImages } from "@/app/lib/app";
 // import { formatPrice } from "@/app/lib/util";
 import { neon } from "@neondatabase/serverless";
@@ -50,7 +51,7 @@ export default async function GalleryMerchPage() {
           <Link href={`/merch/${merch.merch_id}`}>
             <div className="relative group h-full">
               {/* Image */}
-              <img
+              <Image
                 src={merch.image_link}
                 alt={merch.description}
                 className="w-full h-48 object-cover rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
