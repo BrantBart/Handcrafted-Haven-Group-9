@@ -1,8 +1,7 @@
-// src/app/api/merch/create/route.ts
 import { NextResponse } from "next/server";
-// import { neon } from "@neondatabase/serverless";
+import { neon } from "@neondatabase/serverless";
 
-// const sql = neon(`${process.env.DATABASE_URL}`);
+const sql = neon(`${process.env.DATABASE_URL}`);
 
 export async function POST() {
   try {
@@ -16,25 +15,28 @@ export async function POST() {
     };
 
     // SQL query to insert data
-    // const query = `
-    //   INSERT INTO merch (name, price, description, image_link, user_id)
-    //   VALUES ($1, $2, $3, $4, $5)
-    //   RETURNING *;
-    // `;
-    // const values = [
-    //   placeholderData.name,
-    //   placeholderData.price,
-    //   placeholderData.description,
-    //   placeholderData.image_link,
-    //   placeholderData.user_id,
-    // ];
+    const query = `
+      INSERT INTO merch (name, price, description, image_link, user_id)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING *;
+    `;
+    const values = [
+      placeholderData.name,
+      placeholderData.price,
+      placeholderData.description,
+      placeholderData.image_link,
+      placeholderData.user_id,
+    ];
 
     // Execute the query
-    // const result = await sql(query, values);
+    const result = await sql(query, values);
+
+    // result is an array of records, so access the first record directly
+    const insertedMerch = result[0]; // Accessing first element directly
 
     return NextResponse.json({
       message: "Merch item created successfully",
-    //   merch: result.rows[0], // Return inserted row
+      merch: insertedMerch, // Return inserted row
     });
   } catch (error: unknown) {
     console.error("Error inserting merch:", error);

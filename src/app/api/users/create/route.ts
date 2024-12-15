@@ -19,12 +19,12 @@ export async function POST(req: Request) {
 
     const result = await sql(query, values);
 
-    // Check if the result has rows and return the newly inserted user
-    // const insertedUser = result.rows ? result.rows[0] : result[0];
+    // result is an array of records, so access the first record directly
+    const insertedUser = result[0]; // Accessing the first record directly
 
     return NextResponse.json({
       message: "User created successfully",
-    //   user: insertedUser, // Return inserted row
+      user: insertedUser, // Return inserted row
     });
   } catch (error: unknown) {
     console.error("Error creating user:", error);
