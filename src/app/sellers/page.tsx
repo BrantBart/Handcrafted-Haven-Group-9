@@ -16,36 +16,36 @@ export default async function AboutPage() {
   }
 
   // Function to fetch all merch with user info and categories names
-  async function getMerch() {
-    const sql = neon(`${process.env.DATABASE_URL}`);
-    try {
-      // Query to fetch goods and join with users and categories
-      const query = `
-        SELECT 
-          merch.*, 
-          users.username,
-          STRING_AGG(categories.name, ', ') AS Categories,
-          STRING_AGG(reviews.review_id::text, ' | ') AS Reviews
-        FROM merch
-        JOIN users ON merch.user_id = users.user_id
-        LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
-        LEFT JOIN categories ON merch_categories.category_id = categories.category_id
-        LEFT JOIN reviews ON merch.merch_id = reviews.merch_id
-        GROUP BY 
-          merch.merch_id, 
-          users.username,
-          merch.name,
-          merch.created_on,
-          merch.price,
-          merch.description,
-          merch.image_link
-      `;
-      return await sql(query);
-    } catch (error) {
-      console.error("Error fetching goods:", error);
-      return [];
-    }
-  }
+  // async function getMerch() {
+  //   const sql = neon(`${process.env.DATABASE_URL}`);
+  //   try {
+  //     // Query to fetch goods and join with users and categories
+  //     const query = `
+  //       SELECT
+  //         merch.*,
+  //         users.username,
+  //         STRING_AGG(categories.name, ', ') AS Categories,
+  //         STRING_AGG(reviews.review_id::text, ' | ') AS Reviews
+  //       FROM merch
+  //       JOIN users ON merch.user_id = users.user_id
+  //       LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
+  //       LEFT JOIN categories ON merch_categories.category_id = categories.category_id
+  //       LEFT JOIN reviews ON merch.merch_id = reviews.merch_id
+  //       GROUP BY
+  //         merch.merch_id,
+  //         users.username,
+  //         merch.name,
+  //         merch.created_on,
+  //         merch.price,
+  //         merch.description,
+  //         merch.image_link
+  //     `;
+  //     return await sql(query);
+  //   } catch (error) {
+  //     console.error("Error fetching goods:", error);
+  //     return [];
+  //   }
+  // }
 
   // Fetch the data for rendering
   const users = await getUsers();
