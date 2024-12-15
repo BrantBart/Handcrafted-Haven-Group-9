@@ -30,7 +30,7 @@ export async function POST() {
     ];
 
     // Execute the query
-    const result = await sql(query, values);
+    // const result = await sql(query, values);
 
     return NextResponse.json({
       message: "Merch item created successfully",

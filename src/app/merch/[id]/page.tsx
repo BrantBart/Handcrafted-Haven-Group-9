@@ -2,7 +2,7 @@ import { neon } from "@neondatabase/serverless";
 import Image from "next/image";
 
 const sql = neon(`${process.env.DATABASE_URL}`);
-let reviewScore = 0;
+// let reviewScore = 0;
 
 interface PageProps {
   params: Promise<{ id: string }>;

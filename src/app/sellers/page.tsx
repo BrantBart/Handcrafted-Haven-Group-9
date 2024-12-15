@@ -49,7 +49,7 @@ export default async function AboutPage() {
 
   // Fetch the data for rendering
   const users = await getUsers();
-  const merch = await getMerch();
+  // const merch = await getMerch();
 
   return (
     <main className="flex-grow flex flex-col justify-center text-center">
