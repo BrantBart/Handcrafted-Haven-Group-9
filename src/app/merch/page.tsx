@@ -3,60 +3,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import Link from "next/link";
 import Image from "next/image";
-import { neon } from "@neondatabase/serverless";
-import { getSession } from "@/actions";
-const sql = neon(`${process.env.NEXT_PUBLIC_DATABASE_URL}`);
-const session = await getSession();
-
-async function getMerch(searchQuery = "", categoryFilter: string[] = []) {
-  try {
-    // Query to fetch goods and join with users and categories
-    let query = `
-      SELECT 
-        merch.*, 
-        users.username,
-        STRING_AGG(categories.name, ', ') AS Categories,
-        STRING_AGG(reviews.review_id::text, ' | ') AS Reviews
-      FROM merch
-      JOIN users ON merch.user_id = users.user_id
-      LEFT JOIN merch_categories ON merch.merch_id = merch_categories.merch_id
-      LEFT JOIN categories ON merch_categories.category_id = categories.category_id
-      LEFT JOIN reviews ON merch.merch_id = reviews.merch_id
-    `;
-
-    // Add search filter
-    if (searchQuery) {
-      query += ` WHERE merch.name ILIKE '%${searchQuery}%'`;
-    }
-
-    // Add category filter (multiple categories)
-    if (categoryFilter && categoryFilter.length > 0) {
-      query += searchQuery
-        ? ` AND categories.name IN (${categoryFilter
-            .map((cat) => `'${cat}'`)
-            .join(", ")})`
-        : ` WHERE categories.name IN (${categoryFilter
-            .map((cat) => `'${cat}'`)
-            .join(", ")})`;
-    }
-
-    query += `
-      GROUP BY 
-        merch.merch_id, 
-        users.username,
-        merch.name,
-        merch.created_on,
-        merch.price,
-        merch.description,
-        merch.image_link
-    `;
-
-    return (await sql(query)) as unknown as Promise<Merch[]>;
-  } catch (error) {
-    console.error("Error fetching goods:", error);
-    return [];
-  }
-}
+import { getMerch, getCategories, sessions } from "@/utils/merch";
 
 interface Merch {
   merch_id: string;
@@ -69,34 +16,44 @@ interface Merch {
 
 export default function GalleryMerchPage() {
   const [merch, setMerch] = useState<Merch[]>([]);
+  const [isSeller, setIsSeller] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string[]>([]); // Now an array for multi-select
   const [categories, setCategories] = useState<
     { value: string; label: string }[]
   >([]); // Changed to { value, label }
 
-  // Fetch categories for filter dropdown
   useEffect(() => {
-    async function fetchCategories() {
-      const query = `SELECT DISTINCT name FROM categories`;
-      const result = await sql(query);
-      setCategories(
-        result.map((cat) => ({ value: cat.name, label: cat.name }))
-      ); // Set categories in { value, label } format
+    async function fetchAndSetCategories() {
+      const fetchedCategories = await getCategories();
+      setCategories(fetchedCategories);
     }
-    fetchCategories();
+    fetchAndSetCategories();
   }, []);
 
-  // Fetch merch when search or filter changes
-  useEffect(() => {
-    async function fetchMerch() {
-      const merchData = await getMerch(searchQuery, categoryFilter);
-      setMerch(merchData);
-    }
-    fetchMerch();
-  }, [searchQuery, categoryFilter]);
+  // Fetch merch whenever searchQuery or categoryFilter changes
+// Debounce search query
+useEffect(() => {
+  const handler = setTimeout(() => {
+    setDebouncedQuery(searchQuery);
+  }, 500); // 500ms debounce delay
 
-  // Handle category filter change (multi-select)
+  return () => {
+    clearTimeout(handler); // Clear timeout if searchQuery changes again
+  };
+}, [searchQuery]);
+
+// Fetch merch when debouncedQuery or categoryFilter changes
+useEffect(() => {
+  async function fetchAndSetMerch() {
+    const merchData = await getMerch(debouncedQuery, categoryFilter);
+    setMerch(merchData);
+  }
+  fetchAndSetMerch();
+}, [debouncedQuery, categoryFilter]);
+
+  // Handle category filter change
   const handleCategoryChange = (selectedOptions: unknown) => {
     const selectedValues =
       (selectedOptions as Array<{ value: string }>)?.map(
@@ -104,6 +61,14 @@ export default function GalleryMerchPage() {
       ) ?? [];
     setCategoryFilter(selectedValues);
   };
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const result = await sessions();
+      setIsSeller(result ?? false);
+    };
+    fetchSession();
+  }, []);
 
   return (
     <main>
@@ -128,7 +93,7 @@ export default function GalleryMerchPage() {
       </div>
 
       {/* Create New List Item */}
-      {session.isSeller && (
+      {isSeller && (
       <Link
         href="merch/create"
         className="grid self-center gap-2 rounded-lg bg-black px-6 py-3 text-sm text-center font-medium text-white transition-colors w-auto max-w-xs" // Adjust width for Link

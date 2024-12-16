@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { neon } from "@neondatabase/serverless";
-
-const sql = neon(`${process.env.DATABASE_URL}`);
+import { getMerch } from "@/utils/merch"
+const sql = neon(`${process.env.NEXT_PUBLIC_DATABASE_URL}`) || neon(`${process.env.DATABASE_URL}`);
 
 export async function POST() {
   try {
@@ -40,6 +40,19 @@ export async function POST() {
     });
   } catch (error: unknown) {
     console.error("Error inserting merch:", error);
+    return NextResponse.json(
+      { message: "Internal server error", error: (error as Error).message },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    const merch = await getMerch();
+    return NextResponse.json({ merch });
+  } catch (error: unknown) {
+    console.error("Error fetching merch:", error);
     return NextResponse.json(
       { message: "Internal server error", error: (error as Error).message },
       { status: 500 }
