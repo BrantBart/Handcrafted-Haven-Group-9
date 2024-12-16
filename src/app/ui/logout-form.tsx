@@ -17,9 +17,12 @@ const LogoutForm = () => {
   };
 
   return (
-    <form onSubmit={handleLogout}>
-      <button type="submit">Logout</button>
-    </form>
+    <button
+      onClick={handleLogout}
+      className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
+    >
+      Logout
+    </button>
   );
 };
 

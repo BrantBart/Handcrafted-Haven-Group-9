@@ -8,7 +8,7 @@ const Header = async () => {
   console.log(session);
 
   return (
-    <nav className="flex justify-between items-center p-6 px-8 nav mb-4 fixed top-0 left-0 right-0 w-full">
+    <nav className="flex justify-between items-center p-6 px-8 nav mb-4 fixed top-0 left-0 right-0 w-full z-50">
       <Link href="/">
         <div className="flex items-center gap-3 hover:bg-[#588157ff] p-3 rounded-xl">
           <Image src="/H_logo.png" alt="Company Logo" width={40} height={40} />
@@ -30,31 +30,28 @@ const Header = async () => {
         >
           Create Account
         </Link>
-        {/* {session.isLoggedIn && ( */}
-        <Link
-          href="/datapage"
-          className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
-        >
-          Data
-        </Link>
-        {/* )} */}
-        {/* {session.isLoggedIn && ( */}
-        <Link
-          href="/merch"
-          className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
-        >
-          Merchandise
-        </Link>
-        {/* )} */}
-        {/* {session.isLoggedIn && ( */}
-        <Link
-          href="/sellers"
-          className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
-        >
-          Sellers
-        </Link>
-        {/* )} */}
-        {session.isLoggedIn && <LogoutForm />}
+
+        {/* Conditional Rendering for Logged In User */}
+        {session.isLoggedIn && (
+          <>
+            <Link
+              href="/datapage"
+              className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
+            >
+              Data
+            </Link>
+            <Link
+              href="/merch"
+              className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
+            >
+              Merchandise
+            </Link>
+            <Link href="/sellers" className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors">
+              Sellers
+            </Link>
+            <LogoutForm />
+          </>
+        )}
       </div>
     </nav>
   );
