@@ -89,7 +89,7 @@ export default async function MerchIndividualPage({ params }: PageProps) {
                   className="rounded-md cursor-pointer transition-transform duration-300 group-hover:blur-[0.5px]"
                 />
               ) : (
-                <p className="text-center text-gray-500">Image not available</p>
+                <p className="text-center text-black font-bold">Image not available</p>
               )}
             </div>
             <div className="flex flex-col justify-between space-y-4">
@@ -99,7 +99,7 @@ export default async function MerchIndividualPage({ params }: PageProps) {
                 {renderStarRating(averageRating)} ({averageRating.toFixed(1)} /
                 5)
               </p>
-              <p className="text-gray-600">{merch.description}</p>
+              <p className="text-black">{merch.description}</p>
               
               <p className="text-lg">Categories: {merch.categories}</p>
               <p className="text-lg">Seller: {merch.username}</p>
@@ -114,14 +114,14 @@ export default async function MerchIndividualPage({ params }: PageProps) {
                   <p className="text-yellow-500">
                     Rating: {review.review_score} / 5
                   </p>
-                  <p className="text-gray-600">{review.comment}</p>
+                  <p className="text-black">{review.comment}</p>
                   <p className="text-sm text-gray-400">
                     {new Date(review.created_on).toLocaleDateString()}
                   </p>
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-600">No reviews yet</p>
+              <p className="text-center text-black font-bold">No reviews yet</p>
             )}
           </div>
         </div>
