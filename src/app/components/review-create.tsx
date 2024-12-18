@@ -72,7 +72,7 @@ export default function ReviewForm() {
 
   return (
     <form className="space-y-3" onSubmit={handleSubmitReview}>
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pt-6 text-black">
+      <div className="flex-1 logo-box rounded-lg bg-gray-50 px-6 pt-6 text-black">
         <h1 className="mb-3 text-2xl">Submit a Review</h1>
         {message && (
           <div className="bg-blue-500 text-white p-2 rounded mb-4">
@@ -118,7 +118,7 @@ export default function ReviewForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="mt-4 w-full p-3 bg-blue-500 text-white"
+          className="mt-4 w-full p-3 create-account-button"
           disabled={loading}
         >
           {loading ? "Submitting..." : "Submit Review"}
