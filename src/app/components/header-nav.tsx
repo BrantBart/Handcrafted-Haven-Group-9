@@ -66,21 +66,21 @@ const Header = () => {
         {/* Conditional Rendering for Logged In User */}
         {loggedIn && (
           <>
-            <Link
+{/*             <Link
               href="/datapage"
               className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
             >
               Data
-            </Link>
+            </Link> */}
             <Link
               href="/merch"
               className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors"
             >
               Merchandise
             </Link>
-            <Link href="/sellers" className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors">
+{/*             <Link href="/sellers" className="text-md font-medium hover:bg-[#588157ff] p-3 rounded-xl transition-colors">
               Sellers
-            </Link>
+            </Link> */}
             <LogoutForm />
           </>
         )}
