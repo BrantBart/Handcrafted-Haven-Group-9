@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import LogoutForm from "../ui/logout-form";
 import { useState, useEffect } from "react";
-import { sessions } from "@/utils/merch";
+import { isSellerSession } from "@/utils/merch";
 
 
 const Header = () => {
@@ -11,8 +11,8 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   useEffect(() => {
       const fetchSession = async () => {
-        const result = await sessions();
-        setLoggedIn(result.isLoggedIn ?? false);
+        const result = await isSellerSession();
+        setLoggedIn(result ?? false);
       };
       fetchSession();
     }, []);

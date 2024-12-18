@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 import Link from "next/link";
 import Image from "next/image";
-import { getMerch, getCategories, sessions } from "@/utils/merch";
+import { getMerch, getCategories, isSellerSession } from "@/utils/merch";
 
 interface Merch {
   merch_id: string;
@@ -64,11 +64,11 @@ useEffect(() => {
 
   useEffect(() => {
     const fetchSession = async () => {
-      const result = await sessions();
-      setIsSeller(result.isSeller ?? false);
+      const result = await isSellerSession();
+      setIsSeller(result ?? false);
     };
     fetchSession();
-  }, []);
+  });
 
   return (
     <main>

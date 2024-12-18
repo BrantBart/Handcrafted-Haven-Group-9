@@ -4,6 +4,10 @@ import { neon } from "@neondatabase/serverless";
 const sql = neon(`${process.env.NEXT_PUBLIC_DATABASE_URL}`) || neon(`${process.env.DATABASE_URL}`);
 import { getSession } from "@/actions";
 
+export async function isSellerSession(){
+  const session = await getSession();
+  return session.isSeller
+}
 
 export async function sessions(){
     const session = await getSession();
