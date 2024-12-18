@@ -65,7 +65,7 @@ useEffect(() => {
   useEffect(() => {
     const fetchSession = async () => {
       const result = await sessions();
-      setIsSeller(result ?? false);
+      setIsSeller(result.isSeller ?? false);
     };
     fetchSession();
   }, []);
@@ -73,7 +73,7 @@ useEffect(() => {
   return (
     <main>
       {/* Search Bar */}
-      <div className="flex flex-row text-center justify-center items-center mb-4 gap-3">
+      <div className="flex lg:flex-row text-center sm:flex-col justify-center items-center mb-4 gap-3">
         <input
           type="text"
           value={searchQuery}
@@ -90,17 +90,17 @@ useEffect(() => {
           className="react-select-container w-full max-w-md"
           classNamePrefix="react-select"
         />
-      </div>
 
       {/* Create New List Item */}
       {isSeller && (
-      <Link
+        <Link
         href="merch/create"
         className="grid self-center gap-2 rounded-lg bg-black px-6 py-3 text-sm text-center font-medium text-white transition-colors w-auto max-w-xs" // Adjust width for Link
-      >
+        >
         Create New List Item
       </Link>
       )}
+      </div>
 
       {/* Merchandise Display */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ">

@@ -7,7 +7,7 @@ import { getSession } from "@/actions";
 
 export async function sessions(){
     const session = await getSession();
-    return session.isSeller
+    return session
 }
 
 export async function getMerch(searchQuery = "", categoryFilter: string[] = []) {

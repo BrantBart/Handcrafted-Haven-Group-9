@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/app/components/header-nav";
 import Footer from "@/app/components/footer-nav";
-import Spacer from "@/app/components/spacer";
+
 
 export const metadata: Metadata = {
   title: "Title Text Here",
@@ -23,7 +23,6 @@ export default function RootLayout({
           {" "}
           {/* Main container with flexbox */}
           <Header />
-          <Spacer />
           <div className="flex-grow">{children}</div>{" "}
           {/* Make the child content grow */}
           <Footer />
