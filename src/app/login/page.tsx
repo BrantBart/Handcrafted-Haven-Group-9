@@ -1,5 +1,6 @@
 import LoginForm from "@/app/ui/login-form";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
@@ -18,6 +19,7 @@ export default function LoginPage() {
         </div>
         <LoginForm />
       </div>
+      <Link href="/create-account">Don&apos;t have an account?</Link>
     </main>
   );
 }

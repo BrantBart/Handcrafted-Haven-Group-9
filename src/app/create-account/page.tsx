@@ -1,5 +1,6 @@
 import CreateForm from "@/app/ui/create-form";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function CreatePage() {
   return (
@@ -18,6 +19,7 @@ export default function CreatePage() {
         </div>
         <CreateForm />
       </div>
+      <Link href="/login">Already have an account?</Link>
     </main>
   );
 }

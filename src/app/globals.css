@@ -53,6 +53,8 @@ footer,
 }
 
 .login-button:hover,
-.create-account-button:hover {  
+.create-account-button:hover,
+.seller-buttons {  
   background-color: var(--fern-green);
 }
+
