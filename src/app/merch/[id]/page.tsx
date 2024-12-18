@@ -1,5 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import Image from "next/image";
+import ReviewCreate from "@/app/components/review-create";
 
 const sql = neon(`${process.env.DATABASE_URL}`);
 // let reviewScore = 0;
@@ -99,6 +100,7 @@ export default async function MerchIndividualPage({ params }: PageProps) {
                 {renderStarRating(averageRating)} ({averageRating.toFixed(1)} /
                 5)
               </p>
+              <ReviewCreate />
               <p className="text-black">{merch.description}</p>
               
               <p className="text-lg">Categories: {merch.categories}</p>
@@ -128,6 +130,7 @@ export default async function MerchIndividualPage({ params }: PageProps) {
       ) : (
         <p className="text-black">Merch item not found.</p>
       )}
+      
     </main>
   );
 }

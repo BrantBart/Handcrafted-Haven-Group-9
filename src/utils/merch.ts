@@ -14,9 +14,14 @@ export async function sessions(){
     return session
 }
 
+export async function getUserId(){
+  const session = await getSession();
+  return session.userId
+}
+
 export async function getMerch(searchQuery = "", categoryFilter: string[] = []) {
   interface Merch {
-    merch_id: string;
+    merch_id: number;
     name: string;
     created_on: string;
     price: number;
