@@ -19,7 +19,7 @@ export default function LoginPage() {
         </div>
         <LoginForm />
       </div>
-      <Link href="/create-account">Don't have an account?</Link>
+      <Link href="/create-account">Don&apos;t have an account?</Link>
     </main>
   );
 }

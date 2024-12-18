@@ -21,7 +21,7 @@ export async function getUserId(){
 
 export async function getMerch(searchQuery = "", categoryFilter: string[] = []) {
   interface Merch {
-    merch_id: number;
+    merch_id: string;
     name: string;
     created_on: string;
     price: number;
