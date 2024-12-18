@@ -46,8 +46,8 @@ export default function CreateForm() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    if (!username || !email || !password || isSeller === null) {
-      setMessage("Please fill in all fields.");
+    if (!username || !email || !password || isSeller === null || passwordsMatch === false) {
+      setMessage("Please fill in all fields correctly.");
       setLoading(false);
       return;
     }
